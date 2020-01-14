@@ -21,6 +21,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //noinspection GradleCompatible
+    implementation "com.android.support:support-compat:28.0.0"
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
@@ -35,4 +37,5 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.github.mancj:MaterialSearchBar:0.8.2'
     compile project(path: ':offlineMaps')
+    implementation 'com.tapadoo.android:alerter:2.0.0'
 }
