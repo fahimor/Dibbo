@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -26,7 +27,16 @@ import androidx.lifecycle.ViewModelProviders;
 import com.ad.dibbo.EmergencyActivity;
 import com.ad.dibbo.MainActivity;
 import com.ad.dibbo.R;
+import com.ad.dibbo.TestMapActivity;
+
+import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.maps.MapView;
+import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.tapadoo.alerter.Alerter;
+
+import java.io.File;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 
@@ -34,15 +44,22 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
 
+    private MapView mapView;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
+        Mapbox.getInstance(getContext(), "pk.eyJ1Ijoia2ZhaGltMTEwIiwiYSI6ImNrNWZpNnN1ajJpNzkzbG8xcGEyZGJ5enYifQ.t3EdOZShQWkmOhLPLNmtTA");
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         createNotificationChannel();
 
+        //InitializeMap();
+
         Button testAlertButton = (Button) root.findViewById(R.id.testAlertButton);
+        Button testMapButton = (Button) root.findViewById(R.id.testMapButton);
         testAlertButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,6 +92,29 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        testMapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), TestMapActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        mapView = root.findViewById(R.id.mapView);
+        mapView.onCreate(savedInstanceState);
+        mapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(@NonNull MapboxMap mapboxMap) {
+                mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+                    @Override
+                    public void onStyleLoaded(@NonNull Style style) {
+
+                    }
+                });
+            }
+        });
+
+
         return root;
     }
 
@@ -94,4 +134,6 @@ public class HomeFragment extends Fragment {
             notificationManager.createNotificationChannel(channel);
         }
     }
+
+
 }

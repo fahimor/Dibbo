@@ -4,11 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="400dp" />
+        android:layout_height="match_parent" />
 
     <com.mancj.materialsearchbar.MaterialSearchBar
         style="@style/MaterialSearchBarLight"
@@ -30,5 +29,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/map"
         android:text="Test Notification Alert"/>
+    <Button
+        android:id="@+id/testMapButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/testAlertButton"
+        android:text="Test Map Button"/>
 
 </RelativeLayout>
