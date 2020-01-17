@@ -82,14 +82,11 @@ public class TestMapActivity extends AppCompatActivity implements OnMapReadyCall
         mapView.getMapAsync(this);
 
 
-        Initialize();
-    }
-
-
-    private void Initialize(){
-
 
     }
+
+
+
 
     @Override
     public void onMapReady(@NonNull final MapboxMap mapboxMap) {
@@ -99,6 +96,8 @@ public class TestMapActivity extends AppCompatActivity implements OnMapReadyCall
 
             @Override
             public void onStyleLoaded(@NonNull Style style) {
+
+
                 offlineDownload();
                 enableLocationComponent(style);
                 addDestinationIconSymbolLayer(style);

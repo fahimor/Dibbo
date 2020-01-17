@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,17 +45,33 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
 
-    private MapView mapView;
+    //private MapView mapView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        Mapbox.getInstance(getContext(), "pk.eyJ1Ijoia2ZhaGltMTEwIiwiYSI6ImNrNWZpNnN1ajJpNzkzbG8xcGEyZGJ5enYifQ.t3EdOZShQWkmOhLPLNmtTA");
+       // Mapbox.getInstance(getContext(), "pk.eyJ1Ijoia2ZhaGltMTEwIiwiYSI6ImNrNWZpNnN1ajJpNzkzbG8xcGEyZGJ5enYifQ.t3EdOZShQWkmOhLPLNmtTA");
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         createNotificationChannel();
+
+        WebView webview;
+        String html = "<iframe width=\"100%\" height=\"450\" src=\"https://embed.windy.com/embed2.html?lat=22.958&lon=89.978&zoom=6&level=surface&overlay=wind&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=23.742&detailLon=90.428&metricWind=default&metricTemp=default&radarRange=-1\" frameborder=\"0\"></iframe>";
+
+        webview = (WebView) root.findViewById(R.id.webview);
+        webview.getSettings().setJavaScriptEnabled(true);
+        webview.loadData(html, "text/html", null);
+
+        Button barButton = (Button) root.findViewById(R.id.barButton);
+        barButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), EmergencyActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //InitializeMap();
 
@@ -100,19 +117,19 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        mapView = root.findViewById(R.id.mapView);
-        mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(@NonNull MapboxMap mapboxMap) {
-                mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
-                    @Override
-                    public void onStyleLoaded(@NonNull Style style) {
-
-                    }
-                });
-            }
-        });
+//        /*mapView = root.findViewById(R.id.mapView);
+//        mapView.onCreate(savedInstanceState);
+//        mapView.getMapAsync(new OnMapReadyCallback() {
+//            @Override
+//            public void onMapReady(@NonNull MapboxMap mapboxMap) {
+//                mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+//                    @Override
+//                    public void onStyleLoaded(@NonNull Style style) {
+//
+//                    }
+//                });
+//            }
+//        });*/
 
 
         return root;

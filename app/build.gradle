@@ -36,9 +36,10 @@ dependencies {
     implementation 'com.karumi:dexter:6.0.1'
 
     implementation 'com.github.mancj:MaterialSearchBar:0.8.2'
-    compile project(path: ':offlineMaps')
+    implementation project(path: ':offlineMaps')
     implementation 'com.tapadoo.android:alerter:2.0.0'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:8.6.0'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-navigation-ui:0.42.4'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-offline-v8:0.6.0'
+    implementation 'com.github.barteksc:android-pdf-viewer:3.2.0-beta.1'
 }

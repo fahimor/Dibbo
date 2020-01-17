@@ -4,30 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.mapbox.mapboxsdk.maps.MapView
-        android:id="@+id/mapView"
+    <Button
+        android:id="@+id/barButton"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="40dp"
+        android:background="@drawable/gray"
+        android:text="Condition Texts here" />
 
-    <com.mancj.materialsearchbar.MaterialSearchBar
-        style="@style/MaterialSearchBarLight"
-        app:mt_speechMode="false"
-        app:mt_hint="Search a place"
-        app:mt_maxSuggestionsCount="10"
+    <WebView
+        android:id="@+id/webview"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/searchBar"
-        android:layout_margin="16dp"
-        app:mt_navIconEnabled="true"
-        android:elevation="5dp"
-        android:outlineProvider="bounds"
-        app:mt_placeholder="Search a place"/>
+
+        android:layout_below="@+id/barButton"/>
 
     <Button
         android:id="@+id/testAlertButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/map"
+        android:layout_below="@+id/webview"
         android:text="Test Notification Alert"/>
     <Button
         android:id="@+id/testMapButton"
